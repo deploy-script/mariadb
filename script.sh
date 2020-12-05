@@ -1,5 +1,9 @@
 #!/bin/bash
 
+sudo apt -yqq install wget
+
+wget https://raw.githubusercontent.com/deploy-script/mariadb-adminer/master/.env
+
 set -o allexport
 source .env
 set +o allexport
@@ -59,3 +63,7 @@ sudo apt -y install libapache2-mod-php$PHP_VERSION
 sudo service apache2 restart
 
 sudo wget http://www.adminer.org/latest.php -O /var/www/html/index.php
+
+# cleanup
+sudo rm -f .env
+sudo rm -f script.sh
