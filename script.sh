@@ -2,6 +2,8 @@
 
 set -eu
 
+trap cleanup EXIT
+
 #
 ##
 get_environment_file() {
