@@ -93,18 +93,18 @@ install_apache() {
     htpasswd -b -c /etc/apache2/.htpasswd $ADMINER_USER $ADMINER_PASSWORD
 
     echo "<VirtualHost *:80>
-            ServerAdmin $SERVER_EMAIL
-            DocumentRoot /var/www/html
-            ErrorLog \${APACHE_LOG_DIR}/error.log
-            CustomLog \${APACHE_LOG_DIR}/access.log combined
+    ServerAdmin $SERVER_EMAIL
+    DocumentRoot /var/www/html
+    ErrorLog \${APACHE_LOG_DIR}/error.log
+    CustomLog \${APACHE_LOG_DIR}/access.log combined
 
-        <Directory \"/var/www/html\">
-            AuthType Basic
-            AuthName \"Restricted Access\"
-            AuthUserFile /etc/apache2/.htpasswd
-            Require valid-user
-        </Directory>
-    </VirtualHost>
+    <Directory \"/var/www/html\">
+        AuthType Basic
+        AuthName \"Restricted Access\"
+        AuthUserFile /etc/apache2/.htpasswd
+        Require valid-user
+    </Directory>
+</VirtualHost>
     " > /etc/apache2/sites-enabled/000-default.conf
 
     rm  -f /var/www/html/index.html
