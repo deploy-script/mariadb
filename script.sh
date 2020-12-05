@@ -79,7 +79,6 @@ install_php() {
     apt -y install php$PHP_VERSION php$PHP_VERSION-cli
 
     apt -y install php$PHP_VERSION-{mbstring,curl,gd,json,xml,mysql,sqlite3,opcache,zip}
-    apt -y install php-mysql
 
     apt -y install libapache2-mod-php$PHP_VERSION
 }
