@@ -47,7 +47,7 @@ setup_database() {
     echo >&2 "Deploy-Script: [database] - pausing for database server to start"
     sleep 2
 
-    while ! mysqladmin ping --silent -h mysql -u"root" -p"$DB_ROOT_PASSWORD"; do
+    while ! mysqladmin ping --silent -u"root" -p"$DB_ROOT_PASSWORD"; do
         echo >&2 "Deploy-Script: [database] - waiting for database server to start +5s"
         sleep 5
     done
@@ -67,7 +67,7 @@ setup_database() {
     # import database.sql if exists
     if [ -f database.sql ]; then
         echo >&2 "Deploy-Script: [database] - import database file: database.sql"
-        cat database.sql | mysql -h mysql -u root -p"$DB_ROOT_PASSWORD" $DB_NAME
+        cat database.sql | mysql -u root -p"$DB_ROOT_PASSWORD" $DB_NAME
     fi
 }
 
