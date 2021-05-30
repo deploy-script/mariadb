@@ -61,7 +61,7 @@ setup_database() {
     echo >&2 "Deploy-Script: [database] - setup users and database"
 
     mysql -u root -p$DB_ROOT_PASSWORD -e "CREATE DATABASE \`$DB_NAME\` /*\!40100 DEFAULT CHARACTER SET utf8mb4 */;"
-    mysql -u root -p$DB_ROOT_PASSWORD -e "CREATE USER IF NOT EXISTS $DB_USER@'%' IDENTIFIED BY '$DB_PASS';"
+    mysql -u root -p$DB_ROOT_PASSWORD -e "CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS';"
     mysql -u root -p$DB_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON \`$DB_NAME\`.* TO '$DB_USER'@'%';"
     mysql -u root -p$DB_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES on *.* to 'root'@'localhost' IDENTIFIED BY '$DB_ROOT_PASSWORD';"
     mysql -u root -p$DB_ROOT_PASSWORD -e "FLUSH PRIVILEGES;"
@@ -69,7 +69,7 @@ setup_database() {
     # import database.sql if exists
     if [ -f database.sql ]; then
         echo >&2 "Deploy-Script: [database] - import database file: database.sql"
-        cat database.sql | mysql -u root -p"$DB_ROOT_PASSWORD" $DB_NAME
+        cat database.sql | mysql -u root -p"$DB_ROOT_PASSWORD" "$DB_NAME"
     fi
 }
 
